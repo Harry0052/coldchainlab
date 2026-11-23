@@ -45,6 +45,18 @@ public class ScenarioValidatorTests
     }
 
     [Fact]
+    public void Unreasonably_long_runs_and_unsafe_ids_are_rejected()
+    {
+        var json = File.ReadAllText(RepoFiles.Path("fixtures/valid/stable-hold.scenario.json"));
+        var tooLong = ScenarioValidator.Read(json.Replace("\"durationMinutes\": 20", "\"durationMinutes\": 1441", StringComparison.Ordinal));
+        Assert.Contains(tooLong.Errors, error => error.Category == ErrorCategory.InvalidTiming
+            && error.Field == "time.durationMinutes");
+
+        var badId = ScenarioValidator.Read(json.Replace("\"scenarioId\": \"stable-hold\"", "\"scenarioId\": \"../escape\"", StringComparison.Ordinal));
+        Assert.Contains(badId.Errors, error => error.Category == ErrorCategory.InvalidScenarioId);
+    }
+
+    [Fact]
     public void Non_positive_cadence_is_invalid_timing()
     {
         var json = File.ReadAllText(RepoFiles.Path("fixtures/valid/stable-hold.scenario.json"))

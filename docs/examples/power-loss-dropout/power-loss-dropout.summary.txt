@@ -1,0 +1,44 @@
+ColdChainLab drill report
+simulation-status: completed
+limitation: Synthetic demonstration only. Not a vaccine viability, disposition, or compliance judgment.
+scenario: power-loss-dropout
+source: bundled:power-loss-dropout
+schema: 1
+time-unit: min
+temperature-unit: C
+thresholds: low 2 C, high 8 C (demonstration values, not a storage specification)
+provenance: synthetic temperatures generated from the scenario. No remote data and no study dataset.
+
+Findings
+detection delay: none
+missed excursion: fault power-loss-1, true onset minute 12, status undetected. This is separate from any gap alert.
+measurement gap: fault logger-dropout-1, from minute 10, alert at minute 20, status unresolved-at-cutoff. No observed temperature is invented inside the gap.
+incomplete: a true excursion was still past the demonstration threshold at cutoff, so its status is unresolved-at-cutoff.
+recovery: no sample arrived after the gap. A later sample would open a new evidence segment. It would not erase the gap or fill in the missing temperatures.
+
+Timeline
+minute_min  truth_c   observed_c  evidence         finding
+         0  5.000000    5.000000  observed         
+         1  5.269039           -  between-samples  
+         2  5.534459           -  between-samples  
+         3  5.796308           -  between-samples  
+         4  6.054635           -  between-samples  
+         5  6.309487    6.309487  observed         
+         6  6.560911           -  between-samples  
+         7  6.808953           -  between-samples  
+         8  7.053658           -  between-samples  
+         9  7.295071           -  between-samples  
+        10  7.533237    7.533237  observed         
+        11  7.768199           -  gap              
+        12  8.000000           -  gap              true-excursion power-loss-1 onset
+        13  8.228683           -  gap              
+        14  8.454290           -  gap              
+        15  8.676862           -  gap              
+        16  8.896440           -  gap              
+        17  9.113064           -  gap              
+        18  9.326774           -  gap              
+        19  9.537610           -  gap              
+        20  9.745609           -  gap              gap-alert logger-dropout-1
+
+evidence `gap` marks a measurement gap. `-` means the logger has no sample at that minute.
+This table is a simulated rehearsal. It is not a vaccine viability, disposition, or compliance judgment.

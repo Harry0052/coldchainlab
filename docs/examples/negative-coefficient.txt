@@ -1,0 +1,2 @@
+rejected
+invalid-thermal-coefficient thermal.coefficientPerMinute: thermal.coefficientPerMinute must be a finite number greater than 0 and at most 5 per minute. Received -0.2.

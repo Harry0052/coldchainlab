@@ -6,6 +6,9 @@
 # dotenv files
 .env
 
+# Generated drill output
+artifacts/
+
 # User-specific files
 *.rsuser
 *.suo
