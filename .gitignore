@@ -9,6 +9,7 @@
 # Generated drill output and publish folders
 artifacts/
 dist/
+.vstest-artifacts/
 
 # User-specific files
 *.rsuser
