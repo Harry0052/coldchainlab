@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1",
+  "generatedOn": "2026-11-23",
+  "generationSeed": null,
+  "method": "Closed form. No random draws. Power-loss k = -ln(0.85)/12 = 0.013543244125 per minute so T(12 min) = 8 C. Stable hold is the constant target 5 C. See fixtures/oracle/power-loss-drill.md.",
+  "license": "MIT, same as the repository. Fixture text and numbers are original.",
+  "sources": [
+    {
+      "title": "Thermal Analysis of Refrigeration Systems Used for Vaccine Storage",
+      "url": "https://www.nist.gov/publications/thermal-analysis-refrigeration-systems-used-vaccine-storage-0",
+      "reportNumber": "NIST IR 7656",
+      "accessed": "2026-11-23",
+      "use": "Method context for power-loss warming and data-logger placement. No figures, tables, or measurements are copied.",
+      "terms": "Public NIST publication page. Not redistributed."
+    },
+    {
+      "title": "Vaccine Storage and Handling",
+      "url": "https://www.cdc.gov/vaccines/hcp/storage-handling/index.html",
+      "accessed": "2026-11-23",
+      "use": "Method context for monitoring and excursion response. Drill wording is original and is not CDC guidance.",
+      "terms": "Public CDC page. Not redistributed."
+    }
+  ],
+  "files": [
+    {
+      "path": "fixtures/valid/power-loss-drill.scenario.json",
+      "sha256": "dd979808bd062949d8746187babbe091e78093dff9c0a3c9f391711dc3bc85b1",
+      "bytes": 799
+    },
+    {
+      "path": "fixtures/valid/power-loss-drill.temperature.csv",
+      "sha256": "9991958f1de4a5a9ca40afe306e6b4cedb005e47bc0d13bb391536dbe899dac0",
+      "bytes": 722
+    },
+    {
+      "path": "fixtures/valid/power-loss-drill.observations.csv",
+      "sha256": "c52489369667e74f75ebb0f66b0a4b17ded0a441205ef0cb92b928b96dd851e9",
+      "bytes": 202
+    },
+    {
+      "path": "fixtures/valid/power-loss-drill.events.json",
+      "sha256": "6a17416b6fad20c129b2a7486238c6b08642b946fd1c339191aff2fdb15d8b4e",
+      "bytes": 947
+    },
+    {
+      "path": "fixtures/valid/power-loss-dropout.scenario.json",
+      "sha256": "5e77409eb20d88e82a9ec8ce4e46cc1448d056043c337eaee54ef04aa3acaf97",
+      "bytes": 917
+    },
+    {
+      "path": "fixtures/valid/power-loss-dropout.temperature.csv",
+      "sha256": "9991958f1de4a5a9ca40afe306e6b4cedb005e47bc0d13bb391536dbe899dac0",
+      "bytes": 722
+    },
+    {
+      "path": "fixtures/valid/power-loss-dropout.observations.csv",
+      "sha256": "2434c8fed5635974a56f98fd537efb80a8dabee0134069a52d415c94905276ec",
+      "bytes": 136
+    },
+    {
+      "path": "fixtures/valid/power-loss-dropout.events.json",
+      "sha256": "dc3f8a652947a93e1d97fd05f4c9f45ed2729e7db44cac595b7bb01d93bb9868",
+      "bytes": 1142
+    },
+    {
+      "path": "fixtures/valid/stable-hold.scenario.json",
+      "sha256": "ef0ce9b25667253048bbdfb23c620f24912c80cff84e19d536705f6b813023ce",
+      "bytes": 639
+    },
+    {
+      "path": "fixtures/valid/stable-hold.temperature.csv",
+      "sha256": "4a22fddc536847e48540929265124c94845dcc82f79f6b63bbf2e2ae9e4120ff",
+      "bytes": 722
+    },
+    {
+      "path": "fixtures/valid/stable-hold.observations.csv",
+      "sha256": "d661bfe504fbd3f76ecf4bfb3a8bb800e9dc0c2dd79e8d05e2ca4beb629864cc",
+      "bytes": 202
+    },
+    {
+      "path": "fixtures/valid/stable-hold.events.json",
+      "sha256": "bb1a35b81e3abb8a55a48a184a5b4d83174d83035bde3daf5e7bf66f4d8ba38a",
+      "bytes": 428
+    },
+    {
+      "path": "fixtures/invalid/negative-coefficient.scenario.json",
+      "sha256": "fc8d804011c40a7d42ac03797c498373119b370f89298366f593d310da349318",
+      "bytes": 634
+    },
+    {
+      "path": "fixtures/oracle/power-loss-drill.md",
+      "sha256": "c7af6aed061dd791d5716999c00507f62651251be745e381c7482d5fd9c4828f",
+      "bytes": 3743
+    }
+  ]
+}

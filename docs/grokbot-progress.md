@@ -36,3 +36,43 @@ Probe checkouts and installed probe packages stayed outside the repository (`/tm
 **Next phase:** P02 — Create the repository and data contracts.
 
 **Decision:** proceed. No existing tool met the shared acceptance metric, so ColdChainLab stays a separate local drill. See `docs/project-contract.md`.
+
+## P02 — Create the repository and data contracts
+
+**Phase and status:** P02 PASS
+
+**Files changed:**
+
+- `README.md`
+- `.gitignore`
+- `global.json`
+- `Directory.Build.props`
+- `ColdChainLab.slnx`
+- `src/ColdChainLab.Core/`
+- `src/ColdChainLab.Cli/`
+- `tests/ColdChainLab.Tests/`
+- `fixtures/`
+
+**Commands and results:**
+
+- Installed .NET SDK 10.0.404 with the official `dotnet-install.sh` channel LTS. `dotnet --version` printed `10.0.404`.
+- `dotnet test ColdChainLab.slnx`: Passed, 12 tests, 0 failed.
+- `dotnet run --project src/ColdChainLab.Cli -- validate fixtures/valid/power-loss-drill.scenario.json`: exit 0. Stdout began `accepted power-loss-drill` and included the simulation limitation. `simulation-status` is `not-run` because this phase only validates.
+- `dotnet run --project src/ColdChainLab.Cli -- validate fixtures/invalid/negative-coefficient.scenario.json`: exit 2. Stdout: `rejected` and `invalid-thermal-coefficient thermal.coefficientPerMinute: thermal.coefficientPerMinute must be a finite number greater than 0 and at most 5 per minute. Received -0.2.`
+
+**Artifact paths:**
+
+- `fixtures/valid/power-loss-drill.scenario.json`
+- `fixtures/valid/power-loss-drill.temperature.csv`
+- `fixtures/valid/power-loss-drill.observations.csv`
+- `fixtures/valid/power-loss-drill.events.json`
+- `fixtures/invalid/negative-coefficient.scenario.json`
+- `fixtures/oracle/power-loss-drill.md`
+- `fixtures/manifest.json`
+
+**Open issues:**
+
+- `validate` does not simulate. The event JSON files are the oracle for P03, not an engine result yet.
+- SDK roll-forward accepts any later 10.0 patch. The verified SDK is 10.0.404.
+
+**Next phase:** P03 — Build the working core.

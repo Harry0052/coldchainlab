@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/ColdChainLab.Core/ColdChainLab.Core.csproj" />
+  <Project Path="src/ColdChainLab.Cli/ColdChainLab.Cli.csproj" />
+  <Project Path="tests/ColdChainLab.Tests/ColdChainLab.Tests.csproj" />
+</Solution>
