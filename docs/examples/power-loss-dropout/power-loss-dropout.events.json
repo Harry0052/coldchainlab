@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1",
+  "scenarioId": "power-loss-dropout",
+  "simulation": true,
+  "limitation": "Synthetic demonstration only. Not a vaccine viability, disposition, or compliance judgment.",
+  "timeUnit": "min",
+  "temperatureUnit": "C",
+  "lowCelsius": 2,
+  "highCelsius": 8,
+  "evidenceSegments": [
+    {
+      "segment": 1,
+      "startMinute": 0,
+      "endMinute": 10,
+      "sampleCount": 3
+    }
+  ],
+  "events": [
+    {
+      "eventId": "true-power-loss-1",
+      "kind": "true-excursion",
+      "faultId": "power-loss-1",
+      "status": "unresolved-at-cutoff",
+      "startMinute": 12,
+      "endMinute": 20,
+      "thresholdCelsius": 8
+    },
+    {
+      "eventId": "missed-power-loss-1",
+      "kind": "missed-excursion",
+      "faultId": "power-loss-1",
+      "status": "undetected",
+      "matchedTrueEventId": "true-power-loss-1",
+      "thresholdCelsius": 8
+    },
+    {
+      "eventId": "gap-logger-dropout-1",
+      "kind": "gap-alert",
+      "faultId": "logger-dropout-1",
+      "status": "unresolved-at-cutoff",
+      "startMinute": 10,
+      "detectedMinute": 20
+    }
+  ]
+}

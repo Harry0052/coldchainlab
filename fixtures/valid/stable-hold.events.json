@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1",
+  "scenarioId": "stable-hold",
+  "simulation": true,
+  "limitation": "Synthetic demonstration only. Not a vaccine viability, disposition, or compliance judgment.",
+  "timeUnit": "min",
+  "temperatureUnit": "C",
+  "lowCelsius": 2.0,
+  "highCelsius": 8.0,
+  "evidenceSegments": [
+    {
+      "segment": 1,
+      "startMinute": 0,
+      "endMinute": 20,
+      "sampleCount": 5
+    }
+  ],
+  "events": []
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1",
+  "scenarioId": "power-loss-drill",
+  "simulation": true,
+  "limitation": "Synthetic demonstration only. Not a vaccine viability, disposition, or compliance judgment.",
+  "timeUnit": "min",
+  "temperatureUnit": "C",
+  "lowCelsius": 2.0,
+  "highCelsius": 8.0,
+  "evidenceSegments": [
+    {
+      "segment": 1,
+      "startMinute": 0,
+      "endMinute": 20,
+      "sampleCount": 5
+    }
+  ],
+  "events": [
+    {
+      "eventId": "true-power-loss-1",
+      "kind": "true-excursion",
+      "faultId": "power-loss-1",
+      "status": "unresolved-at-cutoff",
+      "startMinute": 12,
+      "endMinute": 20,
+      "thresholdCelsius": 8.0
+    },
+    {
+      "eventId": "alert-power-loss-1",
+      "kind": "excursion-alert",
+      "faultId": "power-loss-1",
+      "status": "detected",
+      "detectedMinute": 15,
+      "delayMinutes": 3,
+      "matchedTrueEventId": "true-power-loss-1",
+      "thresholdCelsius": 8.0
+    }
+  ]
+}

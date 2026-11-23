@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1",
+  "scenarioId": "stable-hold",
+  "description": "Synthetic hold at the target temperature. No fault is injected.",
+  "time": {
+    "origin": "2026-01-01T00:00:00Z",
+    "durationMinutes": 20,
+    "unit": "min"
+  },
+  "thermal": {
+    "coefficientPerMinute": 0.013543244125,
+    "doorCoefficientPerMinute": 0.08,
+    "initialCelsius": 5.0,
+    "ambientCelsius": 25.0,
+    "targetCelsius": 5.0
+  },
+  "control": {
+    "mode": "hold-target",
+    "coolingAvailable": true
+  },
+  "logger": {
+    "cadenceMinutes": 5,
+    "dropoutTimeoutMinutes": 10,
+    "lowCelsius": 2.0,
+    "highCelsius": 8.0
+  },
+  "faults": []
+}
