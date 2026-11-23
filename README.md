@@ -1,10 +1,14 @@
 # ColdChainLab
 
-Local rehearsal for one synthetic refrigerator and one logger configuration. A coordinator or trainer can see whether that configuration would notice a simulated power loss, including how late the alert is and whether missing samples hide the excursion.
+Version 0.1.0. Local rehearsal for one synthetic refrigerator and one logger configuration. A coordinator or trainer can see whether that configuration would notice a simulated power loss, including how late the alert is and whether missing samples hide the excursion.
 
 This is a training drill. It does not alarm a live unit, track vaccine inventory, judge product viability, or tell anyone what to do with a product.
 
 `Synthetic demonstration only. Not a vaccine viability, disposition, or compliance judgment.`
+
+## Supported platform
+
+The tool is a .NET 10 console app. It runs on the operating systems that the .NET 10 SDK supports. The commands below were run on Linux x86_64 with SDK 10.0.404. There is no hardware, instrument, or paid-service demo.
 
 ## Prerequisites
 
@@ -17,25 +21,29 @@ dotnet --version
 
 Verified with SDK 10.0.404.
 
-## Install and test
-
-From the repository root:
+## Clean install
 
 ```bash
-dotnet restore ColdChainLab.slnx
-dotnet build ColdChainLab.slnx
+git clone https://github.com/Harry0052/coldchainlab.git
+cd coldchainlab
+dotnet --version
+dotnet restore ColdChainLab.slnx --locked-mode
 dotnet test ColdChainLab.slnx
 ```
 
 Restore uses the committed NuGet lock files. The drill does not download data.
 
-## Run the bundled drill
+## Demo
+
+After the install above, one command runs the bundled drill:
 
 ```bash
 dotnet run --project src/ColdChainLab.Cli -- demo --out artifacts/demo
 ```
 
-Exit 0. The short result is printed on the terminal. The export directory contains:
+Exit 0. The terminal line `detection-delay-min 3 fault power-loss-1` is the expected result. The human-readable report is `artifacts/demo/power-loss-drill.summary.txt`. It should contain `detection delay: 3 min, fault power-loss-1, detected at minute 15`. The machine-readable copy is `artifacts/demo/power-loss-drill.events.json`.
+
+The export directory also contains:
 
 - `power-loss-drill.scenario.json` — the scenario that was run
 - `power-loss-drill.temperature.csv` — simulated ground truth, one row per minute
@@ -79,13 +87,21 @@ dotnet run --project src/ColdChainLab.Cli -- run fixtures/invalid/negative-coeff
 
 Other usage errors also exit 2. Exit 1 means the scenario was valid and the output directory could not be written. Exit 0 means the command finished.
 
-## Checks
-
-`docs/validation.md` records the acceptance cases, the dependency audit, and the demo timing. The frozen result is a 3 minute detection delay, and the dropout replay keeps the missed excursion separate from the gap alert.
-
 ## What the numbers mean
 
 The hand calculation, the closed-form coefficient, and the expected event files are in `fixtures/oracle/power-loss-drill.md`. Checksums and the method links are in `fixtures/manifest.json`. NIST IR 7656 and the CDC Vaccine Storage and Handling Toolkit are linked there as method context. Their figures and measurements are not in this repository. Thresholds in the drill are demonstration values.
+
+## Fixture terms
+
+Temperatures and wording in `fixtures/` are original and are covered by the MIT license. They were generated from the closed form in `fixtures/oracle/power-loss-drill.md` with no random seed. NIST IR 7656 and the CDC Vaccine Storage and Handling Toolkit are method links in `fixtures/manifest.json`. Those publications are not copied into this repository. Do not treat the 2 °C and 8 °C demonstration thresholds as a storage standard.
+
+## Project files
+
+- `CHANGELOG.md` — version history
+- `CONTRIBUTING.md` — how to build a change
+- `SECURITY.md` — where to report a vulnerability
+- `docs/validation.md` — acceptance evidence
+- `LICENSE` — MIT
 
 ## License
 

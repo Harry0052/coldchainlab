@@ -6,8 +6,9 @@
 # dotenv files
 .env
 
-# Generated drill output
+# Generated drill output and publish folders
 artifacts/
+dist/
 
 # User-specific files
 *.rsuser

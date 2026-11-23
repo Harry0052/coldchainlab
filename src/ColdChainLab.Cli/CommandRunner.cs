@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Reflection;
 using System.Text.Json;
 using ColdChainLab.Core;
 
@@ -164,7 +165,9 @@ public static class CommandRunner
 
     public static void WriteHelp(TextWriter stdout)
     {
-        stdout.WriteLine("coldchainlab — local rehearsal for one synthetic refrigerator logger");
+        var version = typeof(CommandRunner).Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? "0.1.0";
+        stdout.WriteLine($"coldchainlab {version} — local rehearsal for one synthetic refrigerator logger");
         stdout.WriteLine(Limits.Limitation);
         stdout.WriteLine();
         stdout.WriteLine("Usage:");

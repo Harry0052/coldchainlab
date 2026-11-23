@@ -175,3 +175,41 @@ Probe checkouts and installed probe packages stayed outside the repository (`/tm
 - GitHub Actions is not wired yet. That is P06, and hosted CI is P07.
 
 **Next phase:** P06 — Prepare a reproducible open-source release.
+
+## P06 — Prepare a reproducible open-source release
+
+**Phase and status:** P06 PASS
+
+**Files changed:**
+
+- `README.md`
+- `CHANGELOG.md`
+- `CONTRIBUTING.md`
+- `SECURITY.md`
+- `.github/workflows/ci.yml`
+- `Directory.Build.props` (version 0.1.0)
+- `.gitignore`
+
+**Commands and results:**
+
+- `dotnet restore ColdChainLab.slnx --locked-mode`: succeeded.
+- `dotnet format ColdChainLab.slnx --verify-no-changes --no-restore`: exit 0.
+- `dotnet test ColdChainLab.slnx --configuration Release --no-restore`: Passed, 26 tests, 0 failed.
+- `dotnet run --project src/ColdChainLab.Cli --configuration Release --no-restore -- demo --out artifacts/demo`: exit 0. Grep found `detection-delay-min 3 fault power-loss-1`.
+- Dropout demo: grep found `missed-excursions 1` and `gap-alerts 1`.
+- `dotnet publish src/ColdChainLab.Cli/ColdChainLab.Cli.csproj -c Release -o dist/coldchainlab`: succeeded. `dotnet dist/coldchainlab/coldchainlab.dll demo --out /tmp/ccl-published` exit 0 and the summary contains `detection delay: 3 min, fault power-loss-1, detected at minute 15`.
+- A search of tracked text for private keys, cloud access-key ids, and password or secret assignments found no matches.
+- Clean copy of the worktree, excluding `.git`, `bin`, `obj`, `dist`, and `artifacts`: `dotnet restore ColdChainLab.slnx --locked-mode`, `dotnet test ColdChainLab.slnx` (26 passed), and `dotnet run --project src/ColdChainLab.Cli -- demo --out artifacts/demo` exit 0. The summary contains `detection delay: 3 min, fault power-loss-1, detected at minute 15`.
+- Workflow actions are pinned to commits: checkout `11d5960a326750d5838078e36cf38b85af677262`, setup-dotnet `67a3573c9a986a3f9c594539f4ab511d57bb3ce9`, upload-artifact `ea165f8d65b6e75b540449e92b4886f43607fa02`. Permissions are `contents: read`. No secrets.
+
+**Artifact paths:**
+
+- `.github/workflows/ci.yml`
+- `artifacts/demo/power-loss-drill.summary.txt` (local, gitignored)
+- `dist/coldchainlab/` (local, gitignored)
+
+**Open issues:**
+
+- Hosted GitHub Actions has not run yet. That is the P07 gate.
+
+**Next phase:** P07 — Publish and verify on GitHub.
