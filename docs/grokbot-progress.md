@@ -213,3 +213,34 @@ Probe checkouts and installed probe packages stayed outside the repository (`/tm
 - Hosted GitHub Actions has not run yet. That is the P07 gate.
 
 **Next phase:** P07 — Publish and verify on GitHub.
+
+## P07 — Publish and verify on GitHub
+
+**Phase and status:** P07 PASS
+
+**Files changed:**
+
+- `.github/workflows/ci.yml`
+- `.gitignore`
+- `docs/grokbot-progress.md`
+
+**Commands and results:**
+
+- Destination `https://github.com/Harry0052/coldchainlab` is public and the license SPDX id is MIT. The signed-in GitHub identity is `Harry0052`, which matches the remote.
+- The first two workflow runs failed before a job started because the workflow file used `runner.temp` outside a step: runs `45112107864` and `45112279042`. The workflow file was corrected and pushed.
+- `gh pr checks 1` then reported `test` pass. Run `45112332051` concluded `success` on commit `1f69377cd9700a75532741ade33d9a72e8f19837`. URL: https://github.com/Harry0052/coldchainlab/actions/runs/45112332051
+- Annotated tag `v0.1.0` points at that commit and was pushed. It was not merged to `main`.
+- Fresh clone `git clone --depth 1 --branch v0.1.0 https://github.com/Harry0052/coldchainlab.git` checked out `1f69377cd9700a75532741ade33d9a72e8f19837`. `dotnet restore ColdChainLab.slnx --locked-mode` and `dotnet run --project src/ColdChainLab.Cli -- demo --out artifacts/demo` printed `detection-delay-min 3 fault power-loss-1`.
+
+**Artifact paths:**
+
+- Tag `v0.1.0` on `1f69377cd9700a75532741ade33d9a72e8f19837`
+- CI run https://github.com/Harry0052/coldchainlab/actions/runs/45112332051
+- Pull request https://github.com/Harry0052/coldchainlab/pull/1
+
+**Open issues:**
+
+- Actions prints a Node.js 20 deprecation notice for the pinned actions. The job still passed. The actions were left on the commits that were tested.
+- This progress note is a commit after the tag, so `v0.1.0` remains the green commit above. `main` is unchanged.
+
+**Next phase:** none. The owner merges the pull request.
